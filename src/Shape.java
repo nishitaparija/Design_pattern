@@ -1,5 +1,7 @@
 public interface Shape {
     void draw();
+
+    String getType();
 }
 class Rectangle implements Shape {
 
@@ -7,8 +9,13 @@ class Rectangle implements Shape {
     public void draw() {
         System.out.println("Inside Rectangle:draw() method.");
     }
+
+    @Override
+    public String getType() {
+        return null;
+    }
 }
-class Square implements Shape {
+abstract class Square implements Shape {
 
     @Override
     public void draw() {
@@ -20,6 +27,11 @@ class Circle implements Shape {
     @Override
     public void draw() {
         System.out.println("Inside Circle:draw() method.");
+    }
+
+    @Override
+    public String getType() {
+        return null;
     }
 }
 class ShapeFactory {
@@ -34,7 +46,12 @@ class ShapeFactory {
             return new Rectangle();
 
         } else if(shapeType.equalsIgnoreCase("SQUARE")){
-            return new Square();
+            return new Square() {
+                @Override
+                public String getType() {
+                    return null;
+                }
+            };
         }
         return null;
     }
